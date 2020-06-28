@@ -1,0 +1,19 @@
+
+.wraper[data-v-b8dd2314] {
+    width: 100px;
+    height: 200px;
+    overflow-y: scroll;
+    background: url(images/b42e2be354231f3cc6db4dcb900d2ad2.png);
+}
+.scroller[data-v-b8dd2314] {
+    height: 100%;
+}
+.user[data-v-b8dd2314] {
+    height: 32%;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+}
+
+
+/*# sourceMappingURL=index.css.map*/

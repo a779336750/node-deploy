@@ -1,0 +1,47 @@
+const fs = require('fs');
+
+let dirCache = {};
+//创建文件夹
+function mkdir(filepath) {
+    const arr = filepath.split('/');
+    let dir = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (!dirCache[dir] && !fs.existsSync(dir)) {
+            dirCache[dir] = true;
+            fs.mkdirSync(dir);
+        }
+        dir = dir + '/' + arr[i];
+    }
+    dirCache = [];
+}
+
+//清空文件夹
+function cleanDir(path) {
+    deleteFiles(path);
+    if (fs.existsSync(path)) {
+    } else {
+        // 同步地创建目录
+        fs.mkdirSync(path, (err) => {
+        });
+    }
+}
+
+function deleteFiles(path) {
+    let files = [];
+    if (fs.existsSync(path)) {
+        files = fs.readdirSync(path);
+        files.forEach((file, index) => {
+            let curPath = path + "/" + file;
+            if (fs.statSync(curPath).isDirectory()) {
+                deleteFiles(curPath); //递归删除文件夹
+            } else {
+                fs.unlinkSync(curPath); //删除文件
+            }
+        });
+        fs.rmdirSync(path);
+    }
+}
+module.exports = {
+    cleanDir,
+    mkdir
+}
